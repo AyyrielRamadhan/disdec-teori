@@ -1,8 +1,11 @@
 # Ringkasan Materi Minggu ke-1: Pengenalan Sistem Terdistribusi dan Terdesentralisasi
 
 Mata Kuliah: Sistem Terdistribusi dan Terdesentralisasi
+
 Topik: Pengenalan Sistem Terdistribusi dan Terdesentralisasi
+
 Dosen: Dr. Bambang Purnomosidi D. P.
+
 Kode: FIF25002T | SKS: 3 | Prodi: Informatika, FTI UTDI
 
 ---
