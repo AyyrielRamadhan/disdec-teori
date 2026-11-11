@@ -1,0 +1,2 @@
+# disdec-teori
+RESUME OF DISDEC THEORY MATERIAL
