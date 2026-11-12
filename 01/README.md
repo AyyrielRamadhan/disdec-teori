@@ -229,17 +229,17 @@ Kode: FIF25002T | SKS: 3 | Prodi: Informatika, FTI UTDI
 
 <p align="justify">Dalam praktiknya, partisi jaringan bukan pilihan. Kabel bisa putus, jaringan bisa terbelah, dan sistem harus mengantisipasinya. <strong><em>Saat partisi terjadi, perancang harus memilih antara tetap melayani atau tetap konsisten.</em></strong></p>
 
-<p align="justify">Kalau memilih <code>AP</code>, permintaan data akan selalu dilayani, dengan risiko data antar node sempat tidak sinkron. Ini pilihan yang wajar untuk layanan yang tidak boleh berhenti, seperti feed media sosial atau katalog produk.</p>
+<p align="justify">Kalau memilih <code>AP</code>, permintaan data akan selalu dilayani, dengan risiko data antar node sempat tidak sinkron. Ini pilihan yang wajar untuk layanan yang tidak boleh berhenti, seperti feed media sosial atau katalog produk. Contoh: MongoDB.</p>
 
-<p align="justify">Kalau memilih <code>CP</code>, permintaan baca maupun tulis akan ditolak saat tidak bisa dipastikan datanya konsisten. Ini pilihan untuk hal yang kesalahannya mahal, seperti saldo atau pencatatan transaksi. Setelah partisi selesai dan sistem pulih, biasanya ada proses <em>auto healing</em> yang menyamakan data kembali. Namun selama partisi berlangsung, keputusan desainnya tetap harus diambil lebih dulu.</p>
+<p align="justify">Kalau memilih <code>CP</code>, permintaan baca maupun tulis akan ditolak saat tidak bisa dipastikan datanya konsisten. Ini pilihan untuk hal yang kesalahannya mahal, seperti saldo atau pencatatan transaksi. Setelah partisi selesai dan sistem pulih, biasanya ada proses <em>auto healing</em> yang menyamakan data kembali. Namun selama partisi berlangsung, keputusan desainnya tetap harus diambil lebih dulu. Contoh: Apache Casandra.</p>
 
 ---
 
 ## 10. Konsistensi data
 
-<p align="justify"><strong>Strong consistency</strong> berarti hasil baca selalu sama dengan kondisi terakhir yang ditulis. Kalau kita transfer uang lalu langsung mengecek saldo, angka yang muncul harus sudah memperhitungkan transfer itu. Untuk perbankan, ini wajib, karena selisih angka berarti masalah nyata.</p>
+<p align="justify"><strong>Strong consistency</strong> berarti hasil baca selalu sama dengan kondisi terakhir yang ditulis. Contoh kalau kita transfer uang lalu langsung mengecek saldo, angka yang muncul harus sudah memperhitungkan transfer itu. Untuk perbankan, ini wajib, karena selisih angka berarti masalah nyata.</p>
 
-<p align="justify"><strong>Eventual consistency</strong> berarti sistem mungkin sempat menampilkan data lama, tetapi pada akhirnya semua node akan menyamakan diri. Jumlah suka di sebuah unggahan bisa terlambat beberapa detik, dan hampir tidak ada yang peduli. Media sosial memilih model ini karena kecepatan dan ketersediaan lebih penting daripada ketepatan detik per detik.</p>
+<p align="justify"><strong>Eventual consistency</strong> berarti sistem mungkin sempat menampilkan data lama, tetapi pada akhirnya semua node akan menyamakan diri (sinkron). Contoh jumlah suka di sebuah unggahan bisa terlambat beberapa detik, dan hampir tidak ada yang peduli. Media sosial memilih model ini karena kecepatan dan ketersediaan lebih penting daripada ketepatan detik per detik.</p>
 
 <p align="center">Tabel 5: Perbandingan strong dan eventual consistency</p>
 
@@ -295,14 +295,6 @@ Kode: FIF25002T | SKS: 3 | Prodi: Informatika, FTI UTDI
 ## Ringkasan
 
 <p align="justify"><strong>Sistem terdistribusi membagi beban kerja ke banyak mesin agar mampu menangani skala besar dan tetap hidup saat ada komponen yang gagal. Sistem terdesentralisasi membagi kontrol ke banyak pihak agar tidak ada satu titik yang bisa mengendalikan atau melumpuhkan semuanya.</strong> Keduanya saling terkait dan menjadi fondasi teknologi modern, tetapi fokusnya berbeda dan sebaiknya tidak dicampur.</p>
-
----
-
-## Catatan
-
-<p align="justify">Ada dua contoh di slide yang perlu dibaca dengan hati-hati. <strong>Apache Cassandra</strong> umumnya dikategorikan sebagai <code>AP</code> dengan konsistensi yang bisa diatur, bukan <code>CP</code>. Contoh <code>CP</code> yang lebih tidak diperdebatkan adalah HBase, ZooKeeper, atau etcd. <strong>MongoDB</strong> juga sering disebut <code>AP</code> di slide, padahal klasifikasinya bergantung pada konfigurasi <code>replica set</code> dan <code>read concern</code> yang dipakai.</p>
-
-<p align="justify"><strong><em>Untuk ujian, sebaiknya ikuti penjelasan dosen, tetapi pahami juga bahwa pengelompokan ini punya nuansa.</em></strong> Banyak basis data modern menyediakan konsistensi yang bisa diatur per operasi, sehingga label AP atau CP tidak selalu berlaku untuk seluruh sistem.</p>
 
 ---
 
