@@ -276,7 +276,7 @@ Kode: FIF25002T | SKS: 3 | Prodi: Informatika, FTI UTDI
 
 <p align="justify"><strong>Latency</strong> dan <strong>throughput</strong> adalah dua hal yang sering tertukar. Latency berbicara tentang berapa lama satu permintaan diproses. Throughput berbicara tentang berapa banyak permintaan yang bisa diselesaikan dalam satuan waktu. Sistem bisa punya throughput besar tetapi latency tinggi kalau antreannya panjang.</p>
 
-<p align="justify">Keamanan menjadi lebih rumit karena permukaan serangannya bertambah. DDoS membanjiri layanan dengan permintaan palsu sampai kewalahan. Pada sistem terdesentralisasi ada pula <strong>Sybil attack</strong>, yaitu serangan yang membuat banyak identitas palsu sekaligus untuk mendominasi pengaruh, suara, atau reputasi jaringan. Nama Sybil sendiri diambil dari buku tahun 1973 tentang seorang perempuan dengan gangguan identitas.</p>
+<p align="justify">Keamanan menjadi lebih rumit karena permukaan serangannya bertambah. DDoS membanjiri layanan dengan permintaan palsu sampai kewalahan. Pada sistem terdesentralisasi ada <strong>Sybil attack</strong>, yaitu serangan yang membuat banyak identitas palsu sekaligus untuk mendominasi pengaruh, suara, atau reputasi jaringan. Nama Sybil sendiri diambil dari buku tahun 1973 tentang seorang perempuan dengan gangguan identitas.</p>
 
 <p align="justify"><strong><em>Semakin banyak mesin, semakin besar beban pengelolaannya.</em></strong> Konfigurasi, pemantauan, dan pemulihan harus diurus satu per satu. Pada sistem terdesentralisasi muncul persoalan tambahan berupa <strong>governance</strong>, yaitu siapa yang berhak mengubah aturan main. Dalam blockchain, perdebatan ini bisa berujung pada <em>fork</em>, ketika sebagian peserta memilih aturan yang berbeda dan jaringan terbelah.</p>
 
