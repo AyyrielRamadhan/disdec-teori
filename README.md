@@ -32,7 +32,7 @@ Selamat datang di repository rangkuman mata kuliah Sistem Terdistribusi dan Terd
 | Minggu | Topik                                                 |   Status   | URL Pengumpulan                                                                |
 | :----: | ----------------------------------------------------- | :--------: | ------------------------------------------------------------------------------ |
 |   01   | Pengenalan Sistem Terdistribusi dan Terdesentralisasi | ✅ Selesai | [Link Repository](https://github.com/AyyrielRamadhan/disdec-teori/tree/main/01) |
-|   02   | Proses dan Komunikasi Antar Proses                    |  ⬜ Belum  | -                                                                              |
+|   02   | Proses dan Komunikasi Antar Proses                    | ✅ Selesai | [Link Repository](https://github.com/AyyrielRamadhan/disdec-teori/tree/main/02) |
 |   03   | Sinkronisasi Sistem Terdistribusi                     |  ⬜ Belum  | -                                                                              |
 |   04   | Konsistensi dan Replikasi                             |  ⬜ Belum  | -                                                                              |
 |   05   | Fault Tolerance                                       |  ⬜ Belum  | -                                                                              |
@@ -53,7 +53,7 @@ Selamat datang di repository rangkuman mata kuliah Sistem Terdistribusi dan Terd
 ```
 disdec-teori/
 ├── 01/                  # ✅ Rangkuman Minggu ke-1 (Pengenalan Sistem Terdistribusi dan Terdesentralisasi)
-├── 02/                  # ⬜ Rangkuman Minggu ke-2 (Proses dan Komunikasi Antar Proses)
+├── 02/                  # ✅ Rangkuman Minggu ke-2 (Proses dan Komunikasi Antar Proses)
 ├── 03/                  # ⬜ Rangkuman Minggu ke-3 (Sinkronisasi Sistem Terdistribusi)
 ├── 04/                  # ⬜ Rangkuman Minggu ke-4 (Konsistensi dan Replikasi)
 ├── 05/                  # ⬜ Rangkuman Minggu ke-5 (Fault Tolerance)
