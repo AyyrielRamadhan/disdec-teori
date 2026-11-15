@@ -1,4 +1,4 @@
-# Ringkasan Materi Minggu ke-2, Proses dan Komunikasi Antar Proses
+# Ringkasan Materi Minggu ke-2: Proses dan Komunikasi Antar Proses
 
 Mata kuliah: Sistem Terdistribusi dan Terdesentralisasi<br>
 Topik: Proses dan Komunikasi Antar Proses pada Sistem Terdistribusi<br>
