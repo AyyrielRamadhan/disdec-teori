@@ -29,22 +29,22 @@ Selamat datang di repository rangkuman mata kuliah Sistem Terdistribusi dan Terd
 
 ## 📊 Progress Tracker
 
-| Minggu | Topik                                                 |   Status   | URL Pengumpulan                                                                |
-| :----: | ----------------------------------------------------- | :--------: | ------------------------------------------------------------------------------ |
+| Minggu | Topik                                                 |   Status   | URL Pengumpulan                                                                 |
+| :----: | ----------------------------------------------------- | :--------: | ------------------------------------------------------------------------------- |
 |   01   | Pengenalan Sistem Terdistribusi dan Terdesentralisasi | ✅ Selesai | [Link Repository](https://github.com/AyyrielRamadhan/disdec-teori/tree/main/01) |
 |   02   | Proses dan Komunikasi Antar Proses                    | ✅ Selesai | [Link Repository](https://github.com/AyyrielRamadhan/disdec-teori/tree/main/02) |
 |   03   | Sinkronisasi Sistem Terdistribusi                     | ✅ Selesai | [Link Repository](https://github.com/AyyrielRamadhan/disdec-teori/tree/main/03) |
 |   04   | Konsistensi dan Replikasi                             | ✅ Selesai | [Link Repository](https://github.com/AyyrielRamadhan/disdec-teori/tree/main/04) |
 |   05   | Fault Tolerance                                       | ✅ Selesai | [Link Repository](https://github.com/AyyrielRamadhan/disdec-teori/tree/main/05) |
-|   06   | Distributed File System - HDFS                        |  ⬜ Belum  | -                                                                              |
-|   07   | -                                                     |  ⬜ Belum  | -                                                                              |
-|   08   | -                                                     |  ⬜ Belum  | -                                                                              |
-|   09   | -                                                     |  ⬜ Belum  | -                                                                              |
-|   10   | -                                                     |  ⬜ Belum  | -                                                                              |
-|   11   | -                                                     |  ⬜ Belum  | -                                                                              |
-|   12   | -                                                     |  ⬜ Belum  | -                                                                              |
-|   13   | -                                                     |  ⬜ Belum  | -                                                                              |
-|   14   | -                                                     |  ⬜ Belum  | -                                                                              |
+|   06   | Distributed File System - HDFS                        | ✅ Selesai | [Link Repository](https://github.com/AyyrielRamadhan/disdec-teori/tree/main/06) |
+|   07   | -                                                     |  ⬜ Belum  | -                                                                               |
+|   08   | -                                                     |  ⬜ Belum  | -                                                                               |
+|   09   | -                                                     |  ⬜ Belum  | -                                                                               |
+|   10   | -                                                     |  ⬜ Belum  | -                                                                               |
+|   11   | -                                                     |  ⬜ Belum  | -                                                                               |
+|   12   | -                                                     |  ⬜ Belum  | -                                                                               |
+|   13   | -                                                     |  ⬜ Belum  | -                                                                               |
+|   14   | -                                                     |  ⬜ Belum  | -                                                                               |
 
 ---
 
@@ -57,7 +57,7 @@ disdec-teori/
 ├── 03/                  # ✅ Rangkuman Minggu ke-3 (Sinkronisasi Sistem Terdistribusi)
 ├── 04/                  # ✅ Rangkuman Minggu ke-4 (Konsistensi dan Replikasi)
 ├── 05/                  # ✅ Rangkuman Minggu ke-5 (Fault Tolerance)
-├── 06/                  # ⬜ Rangkuman Minggu ke-6 (Distributed File System - HDFS)
+├── 06/                  # ✅ Rangkuman Minggu ke-6 (Distributed File System - HDFS)
 ├── 07/                  # ⬜ Rangkuman Minggu ke-7
 ├── 08/                  # ⬜ Rangkuman Minggu ke-8
 ├── 09/                  # ⬜ Rangkuman Minggu ke-9
