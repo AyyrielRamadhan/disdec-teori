@@ -69,16 +69,6 @@ Kode: FIF25002T | SKS: 3 | Prodi: Informatika, FTI UTDI
 
 <p align="justify"><strong>Agar bisa bekerja sebagai satu sistem logis, node-node itu harus berkomunikasi.</strong> Rantainya sederhana tetapi berulang. Node yang menjalankan proses berhubungan dengan node lain yang juga menjalankan proses, lalu dengan node berikutnya, dan seterusnya. Dari situlah muncul kebutuhan komunikasi antar proses di berbagai node, atau yang biasa disebut IPC.</p>
 
-```mermaid
-flowchart LR
-    N1["Node 1<br/>Proses A"] -->|"pesan"| N2["Node 2<br/>Proses B"]
-    N2 -->|"pesan"| N3["Node 3<br/>Proses C"]
-    N3 -->|"pesan"| N1
-    N1 -.->|"jaringan bisa lambat / terputus"| N3
-```
-
-<p align="center">Gambar 1: Node-node independen yang saling berkomunikasi sebagai satu sistem logis</p>
-
 <p align="justify">Beberapa contoh nyata yang dipakai di kelas adalah sebagai berikut.</p>
 
 - **Multiplayer game.** Gerakan pemain di satu perangkat harus segera terlihat oleh pemain lain, padahal keduanya terhubung ke server yang berbeda.
@@ -90,26 +80,6 @@ flowchart LR
 ## 4. Model komunikasi pesan
 
 <p align="justify">Secara garis besar ada tiga cara proses bertukar pesan. Perbedaannya terletak pada apakah pengirim harus tahu identitas penerima, dan apakah pesan dititipkan lewat perantara.</p>
-
-```mermaid
-flowchart LR
-    subgraph langsung["Langsung - socket"]
-        A1["Proses A"] -->|"socket TCP/UDP"| B1["Proses B"]
-    end
-
-    subgraph tidaklangsung["Tidak langsung - mailbox"]
-        A2["Proses A"] --> Q[("Message queue")]
-        Q --> B2["Proses B"]
-    end
-
-    subgraph pubsub["Pub/Sub"]
-        P["Publisher"] --> T{{"Broker / Topic"}}
-        T --> S1["Subscriber 1"]
-        T --> S2["Subscriber 2"]
-    end
-```
-
-<p align="center">Gambar 2: Tiga model komunikasi pesan</p>
 
 <p align="center">Tabel 2: Perbandingan model komunikasi pesan</p>
 
@@ -157,21 +127,6 @@ flowchart LR
 ## 6. Empat jenis IPC
 
 <p align="justify">Secara umum ada empat jenis IPC yang dikenal. Satu di antaranya hanya bekerja di dalam satu node, sedangkan tiga lainnya dirancang untuk melintasi jaringan.</p>
-
-```mermaid
-flowchart TD
-    IPC["Inter-Process Communication"] --> SM["Shared Memory"]
-    IPC --> MP["Message Passing"]
-    IPC --> RPC["Remote Procedure Call"]
-    IPC --> MW["Middleware / MOM"]
-
-    SM --> SMN["Hanya dalam satu node<br/>tidak cocok untuk sistem terdistribusi"]
-    MP --> MPN["Antar node<br/>lewat pesan eksplisit"]
-    RPC --> RPCN["Antar node<br/>memanggil prosedur seperti fungsi lokal"]
-    MW --> MWN["Antar node<br/>infrastruktur perantara"]
-```
-
-<p align="center">Gambar 3: Empat jenis IPC dan posisinya</p>
 
 <p align="center">Tabel 3: Empat jenis IPC</p>
 
@@ -240,17 +195,6 @@ elif rank == 1:
 
 <p align="justify">Remote Procedure Call membuat pemanggilan lintas jaringan terasa seperti pemanggilan fungsi biasa. Program cukup memanggil <code>hitungBiaya(...)</code>, dan seolah-olah fungsi itu ada di komputer sendiri. Di balik layar, lapisan RPC mengubah panggilan tersebut menjadi pesan, mengirimkannya, menunggu jawaban, lalu mengembalikan hasilnya.</p>
 
-```mermaid
-sequenceDiagram
-    participant C as Client
-    participant S as Server
-    C->>S: panggil prosedur dengan parameter
-    Note over S: prosedur dieksekusi di node lain
-    S-->>C: nilai kembalian atau error
-```
-
-<p align="center">Gambar 4: Alur pemanggilan RPC</p>
-
 <p align="justify">Kemudahan itu menyembunyikan satu hal penting. <strong><em>Panggilan RPC tetap melintasi jaringan, sehingga bisa lambat, gagal, atau terkirim dua kali.</em></strong> Pemanggilan fungsi lokal tidak pernah punya risiko seperti itu. Karena itu RPC yang baik menyertakan <em>timeout</em>, percobaan ulang yang aman, dan penanganan kegagalan yang jelas.</p>
 
 <p align="justify">Contoh RPC modern yang paling banyak dipakai adalah <strong>gRPC</strong>. Layanannya didefinisikan lebih dulu dalam berkas <em>Interface Definition Language</em>, lalu kode klien dan server dibangkitkan otomatis dari definisi tersebut.</p>
@@ -316,26 +260,6 @@ service Penjualan {
 
 <p align="justify">Microservices memecah satu aplikasi besar menjadi banyak layanan kecil yang berdiri sendiri. Setiap layanan punya tanggung jawab sempit, bisa dikembangkan dan diterapkan secara terpisah, serta berkomunikasi dengan layanan lain lewat jaringan. Pola ini sangat bergantung pada IPC yang sudah dibahas sebelumnya.</p>
 
-```mermaid
-flowchart LR
-    U["Aplikasi pengguna"] --> G["API Gateway"]
-
-    G --> O["Order Service"]
-    G --> D["Driver Service"]
-    G --> L["Location Service"]
-    G --> B["Billing Service"]
-
-    D --> DB1[("DB driver")]
-    L --> DB2[("Geo index / cache")]
-    B --> DB3[("DB transaksi")]
-
-    O -.->|"event"| BUS{{"Message broker"}}
-    BUS -.-> D
-    BUS -.-> B
-```
-
-<p align="center">Gambar 5: Pola komunikasi layanan pada aplikasi ride-hailing</p>
-
 <p align="justify">Pada aplikasi seperti Gojek atau Grab, permintaan pengguna masuk lewat API Gateway. Layanan order mencari driver terdekat, layanan lokasi terus memperbarui posisi, dan layanan biaya menghitung tarif. Sebagian panggilan bersifat sinkron karena pengguna menunggu jawaban, sebagian lain dikirim sebagai <em>event</em> ke broker karena tidak perlu ditunggu.</p>
 
 <p align="justify">Keuntungannya, tiap layanan bisa diskalakan sendiri sesuai beban. Harganya, sistem menjadi jauh lebih rumit karena satu permintaan pengguna bisa melewati belasan layanan, sehingga kegagalan, keterlambatan, dan urutan kejadian harus dipikirkan dengan saksama.</p>
@@ -345,34 +269,6 @@ flowchart LR
 ## 11. Komunikasi sinkron dan asinkron
 
 <p align="justify">Pembedaan ini menyangkut siapa yang menunggu siapa. Pada komunikasi <strong>sinkron</strong>, pengirim menunggu sampai penerima memberikan jawaban. Pada komunikasi <strong>asinkron</strong>, pengirim menitipkan pesan lalu melanjutkan pekerjaannya tanpa menunggu hasil.</p>
-
-```mermaid
-sequenceDiagram
-    autonumber
-    participant C as Client
-    participant S as Service
-    Note over C,S: Sinkron
-    C->>S: request
-    Note over C: client menunggu
-    S-->>C: response
-```
-
-<p align="center">Gambar 6: Komunikasi sinkron</p>
-
-```mermaid
-sequenceDiagram
-    autonumber
-    participant C as Client
-    participant Q as Message queue
-    participant S as Service
-    Note over C,Q: Asinkron
-    C->>Q: publish pesan
-    Q-->>C: acknowledgement
-    Note over C: client lanjut kerja
-    Q->>S: pesan dikonsumsi belakangan
-```
-
-<p align="center">Gambar 7: Komunikasi asinkron</p>
 
 <p align="center">Tabel 5: Perbandingan komunikasi sinkron dan asinkron</p>
 
@@ -467,31 +363,7 @@ sequenceDiagram
 
 ## 13. Protokol komunikasi
 
-<p align="justify">Semua komunikasi di atas pada akhirnya berdiri di atas protokol jaringan yang sama. Lapisan paling dasar adalah <strong>TCP</strong> yang andal dan berurutan, <strong>UDP</strong> yang cepat tetapi tanpa jaminan, dan <strong>HTTP</strong> sebagai protokol permintaan-jawaban yang paling luas dipakai.</p>
-
-```mermaid
-flowchart TD
-    subgraph aplikasi["Lapisan aplikasi"]
-        GRPC["gRPC"]
-        GQL["GraphQL"]
-        REST["REST"]
-    end
-    subgraph http["Transport"]
-        H["HTTP/1.1 - HTTP/2 - HTTP/3"]
-    end
-    subgraph dasar["Lapisan dasar"]
-        TCP["TCP - andal, berurutan"]
-        UDP["UDP - cepat, tanpa jaminan"]
-    end
-
-    GRPC --> H
-    GQL --> H
-    REST --> H
-    H -->|"HTTP/1.1 dan HTTP/2"| TCP
-    H -->|"HTTP/3 lewat QUIC"| UDP
-```
-
-<p align="center">Gambar 8: Lapisan protokol komunikasi</p>
+<p align="justify">Semua komunikasi pada akhirnya berdiri di atas protokol jaringan yang sama. Lapisan paling dasar adalah <strong>TCP</strong> yang andal dan berurutan, <strong>UDP</strong> yang cepat tetapi tanpa jaminan, dan <strong>HTTP</strong> sebagai protokol permintaan-jawaban yang paling luas dipakai.</p>
 
 <p align="justify">Di atas HTTP ada tiga gaya yang sering dibandingkan, yaitu <strong>REST</strong> memakai sumber daya dan metode HTTP, <strong>GraphQL</strong> memakai satu <em>endpoint</em> dengan kueri yang ditentukan klien, dan <strong>gRPC</strong> memakai kontrak prosedur serta format biner. HTTP/3 membawa perubahan besar karena berjalan di atas QUIC dan UDP, sehingga kehilangan satu paket tidak lagi menghentikan seluruh antrean.</p>
 
@@ -555,22 +427,6 @@ flowchart TD
 1. Setiap ada kejadian, angka logical clock bertambah satu.
 2. Saat mengirim pesan, komputer menyertakan angka logical clock-nya.
 3. Saat menerima pesan, komputer membandingkan angka pada pesan dengan logical clock-nya, mengambil angka terbesar, lalu menambahkan satu.
-
-```mermaid
-sequenceDiagram
-    participant S as Sales Service
-    participant P as Product Service
-    participant I as Invoice Service
-    Note over S,I: semua mulai dari LC = 0
-    S->>S: catat transaksi, LC = 1
-    S->>P: request (LC = 1)
-    Note over P: max(0, 1) = 1, LC = 2
-    P->>I: request (LC = 2)
-    Note over I: max(0, 2) = 2, LC = 3
-    I->>I: buat invoice, LC = 3
-```
-
-<p align="center">Gambar 9: Alur Lamport logical clock pada tiga layanan</p>
 
 <p align="center">Tabel 8: Langkah Lamport logical clock</p>
 
